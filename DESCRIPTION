@@ -1,0 +1,20 @@
+Package: OAPB
+Type: Package
+Title: Optimal a priori balance in the design of controlled experiments
+Version: 1.0
+Date: 2022-01-05
+Author: Tao Lei, Guorui Quan, Wenhao Yang, Haoyang Zhang
+Maintainer: quanguorui@ruc.edu.cn
+Description: Pure strategy optimal experiments design 
+License: What license is it under?
+Imports: Rcpp (>= 1.0.7)
+LinkingTo: Rcpp, RcppArmadillo
+Depends: 
+    purrr,
+    ROI,
+    Matrix
+Suggests: 
+    ggplot2,
+    JuliaCall,
+    microbenchmark,
+    gurobi
