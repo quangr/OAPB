@@ -1,6 +1,6 @@
 library(Matrix)
-
 PSOD.RKHS <-  function(data,m = 2,rkfunc=rk) {
+
   rk <- function(s, t) {
     s%*%t
   }

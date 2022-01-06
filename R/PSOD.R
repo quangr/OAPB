@@ -138,7 +138,7 @@ PSOD.common.constraint2 <- function(n, m) {
 
 
 PSOD.Lipschitz <- function(data,m = 2,distance="euclidean") {
-  distm <- as.matrix(dist(data,method = "euclidean"))
+  distm <- as.matrix(dist(data,method = distance))
   n=nrow(data)
 
   CCL1=PSOD.common.constraint1(n,m)
@@ -164,7 +164,7 @@ PSOD.Lipschitz <- function(data,m = 2,distance="euclidean") {
                constraints = c(CL2,CL1,CCL1,CCL2),
                types =types,
                maximum = FALSE)
-    (sol <- ROI_solve(milp,solver = "gurobi"))
+    (sol <- ROI_solve(milp))
     return(solution(sol)[2:(2+m*n-1)]%>%matrix(ncol = m,byrow = T)%*%1:m%>%as.vector())
   }
 }

@@ -10,9 +10,9 @@ uniformdata=function(n){
   test
 }
 
-RunSimulation=function(functionset,repeatnum=20,datagen=uniformdata,m=2){
-  future_map(1:repeatnum,function(i){
-    testseq=seq(m,30,m*2)
+RunSimulation=function(functionset,repeatnum=2,datagen=uniformdata,m=2,n=10){
+  map(1:repeatnum,function(i){
+    testseq=seq(m,n,m*2)
     data=datagen(testseq[length(testseq)])
     arrresult=map(functionset,~map(testseq,function(i){.x(data[1:i,])}))
     list(data=data,arrange=arrresult)
@@ -21,11 +21,15 @@ RunSimulation=function(functionset,repeatnum=20,datagen=uniformdata,m=2){
 
 # result=RunSimulation(list(PSOD.Finite.qnorm,partial(PSOD.Finite.qnorm,q=Inf),PSOD.RKHS))
 
-PlotResult=function(result,treatset){
-   data=pairdata(30,m)
-  ar1=matrix(PSOD.Lipschitz(data,m=m),ncol = m,byrow = T)%*%1:m%>%as.vector()
-  ggplot(data,aes(x=x,y=y,shape=as.factor(ar1)))+geom_point()
+PlotResult=function(fun=PSOD.Lipschitz,m=2){
+  data=pairdata(5,m)
+  ar1=matrix(fun(data,m=m),ncol = m,byrow = T)
+  ggplot2::ggplot(data,ggplot2::aes(x=x,y=y,shape=as.factor(ar1)))+ggplot2::geom_point()
 }
+
+
+
+
 PlotCompare=function(result,treatmentfun=function(x,y){x+y}){
   curve=result%>%map(~map(.x$arrange,function(ars){
     treat1=treatmentfun(.x$data$x,.x$data$y)+1

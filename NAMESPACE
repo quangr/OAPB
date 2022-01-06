@@ -1,3 +1,6 @@
 useDynLib(OAPB, .registration=TRUE)
 importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
+importFrom(purrr,"%>%")
+importFrom(purrr,"reduce")
+importFrom(purrr,"map")
